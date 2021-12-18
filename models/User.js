@@ -13,6 +13,18 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  bloodGroup: {
+    type: String,
+    required: true
+  },
+  contactNo: {
+    type: String,
+    required: true
+  },
+  role: {
+    type: String,
+    required: true
+  },
 });
 
 const User = mongoose.model('User', UserSchema);

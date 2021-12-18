@@ -16,7 +16,8 @@ exports.register = (req, res) =>
 
 //Handle Post Request to add a new user
 exports.registerUser = (req, res) => {
-  const { name, email, password, password2 } = req.body;
+  const { name, email, password, password2,bloodGroup,contactNo } = req.body;
+  const role="customer"
   let errors = [];
 
   if (!name || !email || !password || !password2) {
@@ -47,9 +48,13 @@ exports.registerUser = (req, res) => {
           
           name,
           email,
-          password
+          password,
+          bloodGroup,
+          contactNo,
+          role
         });
         newUser.save();
+        res.redirect("/users/login");
       }
     });
   }
