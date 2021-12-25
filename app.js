@@ -40,14 +40,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
 // Connect flash
 app.use(flash());
 
@@ -60,8 +52,9 @@ app.use(function(req, res, next) {
 });
 
 // Routes
-app.use("/", require("./routes/index.js"));
-app.use("/users", require("./routes/users.js"));
+//app.use("/", require("./routes/index.js"));
+app.use("/", require("./routes/role.js"));
+app.use("/customer", require("./routes/customer.js"));
 //app.use("/student", require("./routes/student.route.js"));
 
 const PORT = process.env.PORT || 3000;
