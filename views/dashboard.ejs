@@ -1,11 +1,9 @@
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= role.role %></p>
 <% if ( role.role == "customer") { %>
-    <a href="/customer/dashboard"> valid!!!</a>
+    <a href="/customer/dashboard" class="btn btn-info"> valid!!!</a>
     <a href="/logout" class="btn btn-secondary">Logout</a>
     <%} else { %>
-        <a href="/logout"> valid!!!</a>
+        <a href="/logout" class="btn btn-info"> valid!!!</a>
         <a href="/logout" class="btn btn-secondary">Logout</a>
     <% } %>
-
-

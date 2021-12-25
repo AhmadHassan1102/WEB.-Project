@@ -1,9 +1,13 @@
 const passport = require("passport");
 // Load User model
-const User = require("../models/Customer");
+const Customer = require("../models/Customer");
 //show Function
-exports.show = (req, res) =>
-res.render("customer", {
-  user: req.user,
-  layout: "layouts/layout"
-})
+exports.show = (req, res) =>{
+  Customer.findOne({ email: req.user.email }).then(c => {
+            res.render("customer", {
+            customer: c,
+            layout: "layouts/layout"
+            })
+          })
+        }
+
