@@ -2,9 +2,10 @@
 <% include ./partials/messages %>
 <p class="lead mb-3">Welcome <%= role.role %></p>
 <% if ( role.role == "customer") { %>
-    <a href="/customer/dashboard" class="btn btn-info"> valid!!!</a>
+    <a href="/customer/dashboard" class="btn btn-info"> NEXT</a>
+    <%} else if(role.role=="Admin"){ %>
+        <a href="/admin/dashboard" class="btn btn-info"> NEXT</a>
+    <% } else if(role.role=="doctor"){%>
+        <a href="/doctor/dashboard" class="btn btn-info"> NEXT</a>
+    <% }%>
     <a href="/logout" class="btn btn-secondary">Logout</a>
-    <%} else { %>
-        <a href="/logout" class="btn btn-info"> valid!!!</a>
-        <a href="/logout" class="btn btn-secondary">Logout</a>
-    <% } %>

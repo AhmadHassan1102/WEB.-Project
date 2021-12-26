@@ -55,8 +55,9 @@ app.use(function(req, res, next) {
 //app.use("/", require("./routes/index.js"));
 app.use("/", require("./routes/role.js"));
 app.use("/customer", require("./routes/customer.js"));
+app.use("/admin", require("./routes/admin.js"));
+app.use("/doctor", require("./routes/doctor.js"));
 //app.use("/student", require("./routes/student.route.js"));
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
