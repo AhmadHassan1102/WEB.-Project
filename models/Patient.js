@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CustomerSchema = new mongoose.Schema({
+const PatientSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -21,16 +21,15 @@ const CustomerSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  role: {
+  acceptedOrNot: {
     type: String,
     required: true
   },
-  donated: {
+  role: {
     type: String,
     required: true
   },
 });
 
-const Customer = mongoose.model('Customer', CustomerSchema);
-
-module.exports = Customer;
+const Patient = mongoose.model('Patient', PatientSchema);
+module.exports = Patient;

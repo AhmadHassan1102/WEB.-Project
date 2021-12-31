@@ -1,0 +1,12 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3"><%=patient.name%></p>
+<p class="lead mb-3"><%=patient.email%></p>
+<p class="lead mb-3"><%=patient.contactNo%></p>
+<%if(patient.acceptedOrNot=="pending") {%>
+    <p>This Patient did not recevied any blood</p>
+<%} else{%>
+    <p>This Patient Take Blood of <%=patient.acceptedOrNot%></p>
+<%}%>
+
+    <br>
+<a href="/logout" class="btn btn-secondary">Logout</a>

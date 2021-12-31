@@ -1,10 +1,9 @@
 <h1 class="mt-4">Dashboard</h1>
-<h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3"><%=customer.name%></p>
 <p class="lead mb-3"><%=customer.email%></p>
 <p class="lead mb-3"><%=customer.contactNo%></p>
 <%if(customer.acceptedOrNot!="pending") {%>
-    <p>You blood donated to <%=customer.donated%></p>
+    <p>this customer blood donated to <%=customer.donated%></p>
 <%} else{%>
     <p>Still Pending</p>
 <%}%>

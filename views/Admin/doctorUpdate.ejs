@@ -1,0 +1,71 @@
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Register
+        </h1>
+        <% include ../partials/messages %>
+        <form action="/admin/UpdateDoctor/<%=doctor.email%>" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="name"
+              id="doctorname"
+              name="doctorname"
+              class="form-control"
+              placeholder="Enter Name"
+              value="<%=doctor.name%>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="doctoremail"
+              name="doctoremail"
+              class="form-control"
+              placeholder="Enter Email"
+              value="<%=doctor.email%>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="doctorpassword"
+              name="doctorpassword"
+              class="form-control"
+              placeholder="Enter Password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password2">Confirm Password</label>
+            <input
+              type="password"
+              id="doctorpassword2"
+              name="doctorpassword2"
+              class="form-control"
+              placeholder="Confirm Password"
+              value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="contactNo">Contact No</label>
+            <input
+              type="text"
+              id="doctorcontactNo"
+              name="doctorcontactNo"
+              class="form-control"
+              placeholder="Enter Contact No"
+              value="<%=doctor.contactNo%>"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

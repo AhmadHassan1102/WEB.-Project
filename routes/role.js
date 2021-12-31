@@ -22,4 +22,6 @@ router.get('/logout', roleController.logout);
 // Dashboard
 router.get("/dashboard", ensureAuthenticated,roleController.dashboard);
 
+router.get("/patientdashboard", ensureAuthenticated,roleController.patientdashboard);
+
 module.exports = router;

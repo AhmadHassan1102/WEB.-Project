@@ -1,6 +1,6 @@
 const passport = require("passport");
 // Load Role model
-const Customer = require("../models/Customer");
+const Patient = require("../models/Patient");
 const Role = require("../models/Role");
 
 //Login Function
@@ -17,7 +17,8 @@ exports.register = (req, res) =>
 //Handle Post Request to add a new user
 exports.registerRole = (req, res) => {
     const { name, email, password, password2,bloodGroup,contactNo } = req.body;
-    const role="customer"
+    const role="patient"
+    const donated="pending"
     let errors = [];
   
     if (!name || !email || !password || !password2) {
@@ -43,12 +44,14 @@ exports.registerRole = (req, res) => {
           req.flash("error_msg",errors[0].msg);
           res.redirect("/register");
         } else {
-          const newCustomer = new Customer({
+          const newPatient = new Patient({
             name,
             email,
             password,
             bloodGroup,
             contactNo,
+            bloodGroup,
+            donated,
             role
           });
           const newRole = new Role({
@@ -57,7 +60,7 @@ exports.registerRole = (req, res) => {
             role
           });
           newRole.save();
-          newCustomer.save();
+          newPatient.save();
           res.redirect("/login");
         }
       });
@@ -85,3 +88,19 @@ res.render("dashboard", {
   role: req.user,
   layout: "layouts/layout"
 })
+exports.patientdashboard = (req, res) =>{
+  if(req.user.role=="patient")
+  {
+      Patient.findOne({ email: req.user.email }).then(c => {
+            res.render("patient", {
+            patient: c,
+            layout: "layouts/layout"
+            })
+          })
+  }
+  else
+  {
+    req.flash("error_msg", "You are not a patient");
+    res.redirect("/dashboard");
+  }   
+}
