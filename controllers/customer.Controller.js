@@ -41,7 +41,6 @@ exports.customerDelete  = (req, res) => {
   console.log(req.params.email)
   Customer.deleteOne({ email: req.params.email },function(err){});
     Role.deleteOne({ email: req.params.email },function(err) {
-      console.log("dkfhn");
       if (err) {
         req.flash("error_msg","Some thing went wrong");
         res.redirect("/customer/DisplayCustomer");
@@ -128,6 +127,7 @@ exports.UpdatePOST = (req, res) =>{
   {
     const { customername, customeremail,customerpassword, customerpassword2,customercontactNo } = req.body;
     const role="customer"
+    const acceptedOrNot="pending"
     let errors = [];
   
     if (!customername || !customeremail || !customerpassword || !customerpassword2||!customercontactNo) {

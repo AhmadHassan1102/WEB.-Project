@@ -90,9 +90,14 @@ exports.patientget = (req, res) =>{
   };
   
   exports.patientDelete  = (req, res) => {
-    Patient.deleteOne({ email: req.params.email });
+    Patient.deleteOne({ email: req.params.email },function(err) {
+        if (err) {
+          req.flash("error_msg","Some thing went wrong");
+          res.redirect("/admin/DisplayPatient");
+          return;
+        }
+      });  
       Role.deleteOne({ email: req.params.email },function(err) {
-        console.log("dkfhn");
         if (err) {
           req.flash("error_msg","Some thing went wrong");
           res.redirect("/admin/DisplayPatient");
