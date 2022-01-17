@@ -3,11 +3,11 @@
 <p class="lead mb-3"><%=customer.name%></p>
 <p class="lead mb-3"><%=customer.email%></p>
 <p class="lead mb-3"><%=customer.contactNo%></p>
-<%if(customer.acceptedOrNot!="pending") {%>
+<%if(customer.donated!="pending") {%>
     <p>You blood donated to <%=customer.donated%></p>
 <%} else{%>
     <p>Still Pending</p>
 <%}%>
-
+<%=customer.acceptedOrNot%>
     <br>
 <a href="/logout" class="btn btn-secondary">Logout</a>

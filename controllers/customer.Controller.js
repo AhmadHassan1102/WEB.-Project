@@ -23,18 +23,41 @@ exports.show = (req, res) =>{
 }
 
 exports.customerDisplay  = (req, res) => {
-
+  perPage=5;
+  pageNo=req.params.page;
+  if(pageNo==undefined)
+  pageNo=1;
   Customer.find(function(err, customers) {
     if (err) {
       return res
         .status(400)
         .json({ err: "Oops something went wrong! Cannont find students." });
     }
-    res.status(200).render("Admin/customerDisplay", {
-      customers,
-      layout: "layouts/l"
+    if(customers.length==0&&pageNo!=1)
+    {
+      req.flash("error_msg","Limit Exceded!!")
+      res.redirect("/customer/DisplayCustomer/1");
+      return;
+    }
+    if(customers.length==0&&pageNo==1)
+    {
+      res.status(200).render("Admin/customerDisplay", {
+        customers,
+        error_msg:"Customer not Founded!!",
+        total:customers.length,
+        layout: "layouts/l"
+      });
+      return;
+    }
+    Customer.find(function(err, cus)
+    {
+      res.status(200).render("Admin/customerDisplay", {
+        customers,
+        total:cus.length,
+        layout: "layouts/l"
+      });
     });
-  });
+  }).limit(perPage).skip(perPage*(pageNo-1));
 };
 
 exports.customerDelete  = (req, res) => {
@@ -86,6 +109,7 @@ exports.SearchCustomer = (req, res) => {
     }
     res.render("Admin/customerDisplay", {
       customers,
+      total:customers.length,
       success_msg:"Customers founded!!",
       layout: "layouts/l"
     });

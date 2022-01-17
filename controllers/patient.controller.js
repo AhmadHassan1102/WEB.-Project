@@ -75,18 +75,41 @@ exports.patientget = (req, res) =>{
   };
   
   exports.patientDisplay  = (req, res) => {
-  
+    perPage=5;
+    pageNo=req.params.page;
+    if(pageNo==undefined)
+    pageNo=1;
     Patient.find(function(err, patients) {
       if (err) {
         return res
           .status(400)
           .json({ err: "Oops something went wrong! Cannont find students." });
       }
+    if(patients.length==0&&pageNo!=1)
+    {
+      req.flash("error_msg","Limit Exceded!!")
+      res.redirect("/admin/DisplayPatient/1");
+      return;
+    }
+    if(patients.length==0&&pageNo==1)
+    {
       res.status(200).render("Patient/patientDisplay", {
         patients,
+        total:patients.length,
+        error_msg:"Patient not Founded!!",
+        layout: "layouts/l"
+      });
+      return;
+    }
+    Patient.find(function(err, p)
+    {
+      res.status(200).render("Patient/patientDisplay", {
+        patients,
+        total:p.length,
         layout: "layouts/l"
       });
     });
+  }).limit(perPage).skip(perPage*(pageNo-1));
   };
   
   exports.patientDelete  = (req, res) => {
@@ -139,6 +162,7 @@ exports.patientget = (req, res) =>{
       }
       res.render("Patient/patientDisplay", {
         patients,
+        total:patients.length,
         success_msg:"Patients founded!!",
         layout: "layouts/l"
       });

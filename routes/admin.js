@@ -14,6 +14,8 @@ router.post('/ADDDoctor', ensureAuthenticated, adminController.DoctorPOST);
 
 router.get('/DisplayDoctor', ensureAuthenticated, adminController.doctorDisplay);
 
+router.get('/DisplayDoctor/:page', ensureAuthenticated, adminController.doctorDisplay);
+
 router.post('/DisplayDoctor', ensureAuthenticated, adminController.DoctorPOST);
 
 router.get('/DisplayDelete/:email', ensureAuthenticated, adminController.doctorDelete);
@@ -31,6 +33,8 @@ router.get('/ADDPatient', ensureAuthenticated, patientController.patientget);
 router.post('/ADDPatient', ensureAuthenticated, patientController.PatientPOST);
 
 router.get('/DisplayPatient', ensureAuthenticated, patientController.patientDisplay);
+
+router.get('/DisplayPatient/:page', ensureAuthenticated, patientController.patientDisplay);
 
 router.post('/DisplayPatient', ensureAuthenticated, patientController.PatientPOST);
 

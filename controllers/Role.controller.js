@@ -22,7 +22,7 @@ exports.registerRole = (req, res) => {
     const donated="pending"
     let errors = [];
   
-    if (!name || !email || !password || !password2) {
+    if (!name || !email || !password || !password2||!bloodGroup||!contactNo) {
       errors.push({ msg: "Please enter all fields" });
     }
   
@@ -38,7 +38,8 @@ exports.registerRole = (req, res) => {
       req.flash("error_msg",errors[0].msg);
   
       res.redirect("/register");
-    } else {
+    } 
+    else {
       Role.findOne({ email: email }).then(user => {
         if (user) {
           errors.push({ msg: "Email already exists" });

@@ -7,8 +7,9 @@ const customerController = require('../controllers/customer.Controller');
 // ShowData
 router.get('/dashboard', ensureAuthenticated, customerController.show);
 
+router.get('/DisplayCustomer', ensureAuthenticated, customerController.customerDisplay);
 
-router.get('/DisplayCustomer/', ensureAuthenticated, customerController.customerDisplay);
+router.get('/DisplayCustomer/:page', ensureAuthenticated, customerController.customerDisplay);
 
 router.get('/DisplayDelete/:email', ensureAuthenticated, customerController.customerDelete);
 

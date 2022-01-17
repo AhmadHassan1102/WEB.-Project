@@ -88,18 +88,42 @@ exports.DoctorPOST = (req, res) => {
 };
 
 exports.doctorDisplay  = (req, res) => {
-
-  Doctor.find(function(err, doctors) {
+  perPage=5;
+  pageNo=req.params.page;
+  if(pageNo==undefined)
+  pageNo=1;
+  Doctor.find(function(err, doctors)
+   {
     if (err) {
       return res
         .status(400)
         .json({ err: "Oops something went wrong! Cannont find students." });
     }
-    res.status(200).render("Admin/doctorDisplay", {
-      doctors,
-      layout: "layouts/l"
+    if(doctors.length==0&&pageNo!=1)
+    {
+      req.flash("error_msg","Limit Exceded!!")
+      res.redirect("/admin/DisplayDoctor/1");
+      return;
+    }
+    if(doctors.length==0&&pageNo==1)
+    {
+      res.status(200).render("Admin/doctorDisplay", {
+        doctors,
+        total:doctors.length,
+        error_msg:"Doctor not found!!",
+        layout: "layouts/l"
+      });
+    }
+   Doctor.find(function(err, doc)
+    {
+      res.status(200).render("Admin/doctorDisplay", {
+        doctors,
+        total:doc.length,
+        layout: "layouts/l"
+      });
     });
-  });
+    
+  }).limit(perPage).skip(perPage*(pageNo-1));
 };
 
 exports.doctorDelete  = (req, res) => {
@@ -151,6 +175,7 @@ exports.SearchDoctor = (req, res) => {
     }
     res.render("Admin/doctorDisplay", {
       doctors,
+      total:doc.length,
       success_msg:"Doctors founded!!",
       layout: "layouts/l"
     });

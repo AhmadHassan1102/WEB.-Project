@@ -16,7 +16,7 @@ const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
@@ -24,8 +24,6 @@ mongoose
 app.use(expressLayouts);
 app.set("view engine", "ejs");
 app.use(express.static(__dirname));
-//app.use(express.static(path.join(__dirname, "public")));
-//app.set("views", path.join(__dirname, "views/layouts"));
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 
